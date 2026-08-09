@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as InformaceRouteImport } from './routes/informace'
+import { Route as KalendarRouteImport } from './routes/kalendar'
+import { Route as PrihlaseniRouteImport } from './routes/prihlaseni'
+import { Route as ApiPublicRezervaceRouteImport } from './routes/api/public/rezervace'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InformaceRoute = InformaceRouteImport.update({
+  id: '/informace',
+  path: '/informace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KalendarRoute = KalendarRouteImport.update({
+  id: '/kalendar',
+  path: '/kalendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrihlaseniRoute = PrihlaseniRouteImport.update({
+  id: '/prihlaseni',
+  path: '/prihlaseni',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicRezervaceRoute = ApiPublicRezervaceRouteImport.update({
+  id: '/api/public/rezervace',
+  path: '/api/public/rezervace',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/informace': typeof InformaceRoute
+  '/kalendar': typeof KalendarRoute
+  '/prihlaseni': typeof PrihlaseniRoute
+  '/api/public/rezervace': typeof ApiPublicRezervaceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/informace': typeof InformaceRoute
+  '/kalendar': typeof KalendarRoute
+  '/prihlaseni': typeof PrihlaseniRoute
+  '/api/public/rezervace': typeof ApiPublicRezervaceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/informace': typeof InformaceRoute
+  '/kalendar': typeof KalendarRoute
+  '/prihlaseni': typeof PrihlaseniRoute
+  '/api/public/rezervace': typeof ApiPublicRezervaceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/informace'
+    | '/kalendar'
+    | '/prihlaseni'
+    | '/api/public/rezervace'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/blog'
+    | '/informace'
+    | '/kalendar'
+    | '/prihlaseni'
+    | '/api/public/rezervace'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/informace'
+    | '/kalendar'
+    | '/prihlaseni'
+    | '/api/public/rezervace'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
+  InformaceRoute: typeof InformaceRoute
+  KalendarRoute: typeof KalendarRoute
+  PrihlaseniRoute: typeof PrihlaseniRoute
+  ApiPublicRezervaceRoute: typeof ApiPublicRezervaceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/informace': {
+      id: '/informace'
+      path: '/informace'
+      fullPath: '/informace'
+      preLoaderRoute: typeof InformaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kalendar': {
+      id: '/kalendar'
+      path: '/kalendar'
+      fullPath: '/kalendar'
+      preLoaderRoute: typeof KalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prihlaseni': {
+      id: '/prihlaseni'
+      path: '/prihlaseni'
+      fullPath: '/prihlaseni'
+      preLoaderRoute: typeof PrihlaseniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/rezervace': {
+      id: '/api/public/rezervace'
+      path: '/api/public/rezervace'
+      fullPath: '/api/public/rezervace'
+      preLoaderRoute: typeof ApiPublicRezervaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
+  InformaceRoute: InformaceRoute,
+  KalendarRoute: KalendarRoute,
+  PrihlaseniRoute: PrihlaseniRoute,
+  ApiPublicRezervaceRoute: ApiPublicRezervaceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
