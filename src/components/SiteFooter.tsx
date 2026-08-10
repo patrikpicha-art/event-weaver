@@ -89,7 +89,17 @@ export function SiteFooter() {
       <div className="relative flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-t border-border/70 py-6 text-center text-xs text-muted-foreground">
         <span>© 2025 KostkaProkletá, z.s. Všechna práva vyhrazena.</span>
         <span className="hidden sm:inline">·</span>
-        <span>Design Kateřina Krametbauer</span>
+        <span>
+          Designed by{" "}
+          <a
+            href="https://feroxa.cz"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-primary"
+          >
+            Patrik Pícha – feroxa.cz
+          </a>
+        </span>
         <span className="hidden sm:inline">·</span>
         <Link to="/prihlaseni" className="hover:text-primary">
           Správa kalendáře

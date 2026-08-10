@@ -1,24 +1,42 @@
 # Event Weaver
 
-koukni na github kostka-proklet-redesigned, chtělo by to sem ještě přidat nějakej hezkej wow efekt, něco zajimaveho, dále kalendár by chtělo předělat tak aby byl editovatelnej tak že když se prihlasim jako admin na stranku muzu mazat a editovat, to same kdyz nekdo klikne na nejakej datum tak moznost rovnou vybrat cas s tim ze se posle na email ty herny rovnou dotaz kde primo v emailu to muze typek odsouhlasit a propise se to do kalendare, jo a ten kalendar je hodne malinkej na tom webu na tom truchu zapracuj.. uplne dole chete se na neco zeptat at to taky vypada lepe. jeste bych nekam zakomponoval to logo libi se mi..
+Web deskoherního klubu **Kostka Prokletá** (Strakonice) – prezentace klubu,
+editovatelný kalendář akcí a rezervace herny přes e-mail.
 
-This project was built with [Lovable](https://lovable.dev).
+Postaveno na TanStack Start (React 19 + Vite + Tailwind) se Supabase jako backendem.
 
-## Build with Lovable
+## Vývoj
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/e7124c1a-cc46-4ee7-9b7b-ead68696603e).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Potřebuješ Node.js a npm.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
+git clone https://github.com/patrikpicha-art/event-weaver
+cd event-weaver
 npm i
 npm run dev
 ```
+
+## Skripty
+
+- `npm run dev` – vývojový server
+- `npm run build` – produkční build
+- `npm run lint` – ESLint
+- `npm run format` – Prettier
+
+## Proměnné prostředí
+
+Veřejné hodnoty (`VITE_SUPABASE_*`, `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`)
+jsou v `.env`. Pro serverové operace nad rámec veřejného čtení je potřeba navíc
+nastavit v prostředí hostingu:
+
+- `SUPABASE_SERVICE_ROLE_KEY` – potvrzování rezervací
+- `RESEND_API_KEY` + `EMAIL_FROM` – odesílání e-mailů o rezervacích
+- `SITE_URL` – veřejná adresa webu (odkazy v e-mailech)
+
+## Nasazení
+
+Projekt se buildí Nitrem, které si cíl detekuje samo (Vercel, Netlify,
+Cloudflare). Na Vercelu stačí `npm run build`, výstup se vytvoří
+v `.vercel/output`.
+
+Design: Patrik Pícha – [feroxa.cz](https://feroxa.cz)
