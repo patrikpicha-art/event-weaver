@@ -195,7 +195,7 @@ export function ClubCalendar({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className="grid gap-5 xl:grid-cols-[1.9fr_1fr]">
-      <div className="surface relative overflow-hidden rounded-lg p-5 md:p-8">
+      <div className="surface relative overflow-hidden rounded-lg p-3 sm:p-5 md:p-8">
         <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
         <div className="relative flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -271,7 +271,7 @@ export function ClubCalendar({ compact = false }: { compact?: boolean }) {
           ))}
         </div>
 
-        <div className="relative mt-7 grid grid-cols-7 gap-1.5 text-center text-[0.7rem] uppercase tracking-widest text-muted-foreground">
+        <div className="relative mt-7 grid grid-cols-7 gap-1 text-center text-[0.7rem] uppercase tracking-widest text-muted-foreground sm:gap-1.5">
           {WEEKDAYS.map((w) => (
             <div key={w} className="py-1">
               {w}
@@ -279,7 +279,7 @@ export function ClubCalendar({ compact = false }: { compact?: boolean }) {
           ))}
         </div>
 
-        <div className="relative mt-1.5 grid grid-cols-7 gap-1.5">
+        <div className="relative mt-1.5 grid grid-cols-7 gap-1 sm:gap-1.5">
           {grid.map((cell) => {
             const dayEvents = byDay.get(cell.key) ?? [];
             const isToday = cell.key === todayKey;
@@ -289,18 +289,25 @@ export function ClubCalendar({ compact = false }: { compact?: boolean }) {
                 key={cell.key}
                 type="button"
                 onClick={() => setSelected(cell.key)}
-                className={`group relative flex min-h-[100px] flex-col items-start gap-1.5 rounded-md border p-2 text-left transition-all duration-200 sm:min-h-[120px] md:min-h-[140px] ${
+                className={`group relative flex min-h-[52px] flex-col items-start gap-1 rounded-md border p-1 text-left transition-all duration-200 sm:min-h-[120px] sm:gap-1.5 sm:p-2 md:min-h-[140px] ${
                   isSelected
                     ? "border-primary bg-primary/10 shadow-[var(--shadow-forge)]"
                     : "border-border/60 hover:-translate-y-0.5 hover:border-primary/60"
                 } ${cell.inMonth ? "" : "opacity-35"}`}
               >
                 <span
-                  className={`text-sm ${isToday ? "flex h-7 w-7 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground" : "text-muted-foreground"}`}
+                  className={`text-xs sm:text-sm ${isToday ? "flex h-6 w-6 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground sm:h-7 sm:w-7" : "text-muted-foreground"}`}
                 >
                   {cell.day}
                 </span>
-                <span className="flex w-full flex-col gap-1">
+                {/* Na mobilu se název akce do buňky nevejde – jen barevná tečka,
+                    detail dne je pod kalendářem. */}
+                <span className="flex flex-wrap gap-0.5 sm:hidden">
+                  {dayEvents.slice(0, 3).map((e) => (
+                    <span key={e.id} className={`h-1.5 w-1.5 rounded-full ${categorize(e.title).dot}`} />
+                  ))}
+                </span>
+                <span className="hidden w-full flex-col gap-1 sm:flex">
                   {dayEvents.slice(0, 3).map((e) => {
                     const cat = categorize(e.title);
                     return (
@@ -322,7 +329,7 @@ export function ClubCalendar({ compact = false }: { compact?: boolean }) {
                     </span>
                   )}
                 </span>
-                <span className="mt-auto text-[0.6rem] uppercase tracking-widest text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                <span className="mt-auto hidden text-[0.6rem] uppercase tracking-widest text-primary opacity-0 transition-opacity group-hover:opacity-100 sm:block">
                   {isAdmin ? "spravovat" : "rezervovat"}
                 </span>
               </button>
